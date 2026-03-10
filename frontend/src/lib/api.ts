@@ -17,13 +17,7 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (res) => res,
-  (err) => {
-    if (err.response?.status === 401 && typeof window !== "undefined") {
-      localStorage.removeItem("anpr_token");
-      window.location.href = "/auth/login";
-    }
-    return Promise.reject(err);
-  }
+  (err) => Promise.reject(err)
 );
 
 export const WS_BASE = API_BASE.replace(/^http/, "ws");
